@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/Delete.png</file>
+        <file>images/Medium Volume Filled-50.png</file>
+        <file>images/microphone.png</file>
+        <file>images/Microphone-48.png</file>
+        <file>images/replace.png</file>
+        <file>images/Resize Vertical-52.png</file>
+        <file>images/volume.png</file>
+        <file>images/arrow-down.png</file>
+        <file>images/arrow-left.png</file>
+        <file>images/arrow-right.png</file>
+        <file>images/arrow-up.png</file>
+        <file>images/delete-down.png</file>
+        <file>images/microphone-down.png</file>
+        <file>images/scrollbar-handle-horizontal.png</file>
+        <file>images/scrollbar-handle-vertical.png</file>
+        <file>images/arrow-left-white.png</file>
+        <file>images/arrow-right-white.png</file>
+        <file>images/picture.jpg</file>
+        <file>images/like.png</file>
+        <file>images/like-down.png</file>
+        <file>images/rotate.png</file>
+        <file>images/rotate-down.png</file>
+        <file>images/replace-down.png</file>
+    </qresource>
+</RCC>

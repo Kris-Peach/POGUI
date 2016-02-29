@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MyStyle.qml</file>
+        <file>qmldir</file>
+        <file>LightComboBoxStyle.qml</file>
+        <file>LightScrollViewStyle.qml</file>
+        <file>LightTextAreaStyle.qml</file>
+        <file>Cart.qml</file>
+    </qresource>
+</RCC>
