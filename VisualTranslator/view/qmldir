@@ -1,0 +1,4 @@
+singleton MyStyle MyStyle.qml
+LightComboBoxStyle LightComboBoxStyle.qml
+LightTextAreaStyle LightTextAreaStyle.qml
+Card Card.qml
