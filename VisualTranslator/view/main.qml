@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls.Private 1.0
 import QtGraphicalEffects 1.0
+import Qt.controller.appmanager 1.0
 import "."
 Window {
     id:mainWindow
@@ -163,10 +164,14 @@ Window {
                         anchors.fill: parent
                         hoverEnabled: true
                         onClicked:{
-                            //yandexTranslater.setText(textInput.text)
-                            //yandexTranslater.setLang(langInput+"-"+langOutput)
-                            var str=manager.translate(0,langInput+"-"+langOutput,textInput.text)//yandexTranslater.yantranslate();
+                            var str=AppManager.translate(0,langInput+"-"+langOutput,textInput.text)//yandexTranslater.yantranslate();
                             textOutput.text=qsTr(str);
+                            container.model.clear()
+                            var words=AppManager.getDataForCards(0,textInput.text)
+                            for(var i=0;i<words[0].length;i++)
+                               container.model.append({"myword":words[0][i],"mytranslation":words[1][i],
+                                                      "mysource":words[2][i]})
+
                            // if(checkTransleteInImage.checked)
                             //card1.urlImage=instaPicture.getPicture(str);
                         }
@@ -305,6 +310,7 @@ Window {
                             id: left_area
                             anchors.fill: parent
                             hoverEnabled: true
+                            onClicked: container.contentX-=container.contentX>0?50:0
                         }
                 Image{
                     source: "images/arrow-left-white.png"
@@ -327,9 +333,10 @@ Window {
                         cached: true;
                 }
 
-            Row{
+            ListView{
                 id:container
-                spacing: 2
+                spacing: 10
+                orientation: ListView.Horizontal
                 anchors.left: leftButton.right;anchors.leftMargin: 10
                 anchors.right: rightButton.left;anchors.rightMargin: 10
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -337,12 +344,19 @@ Window {
                 width: parent.width-2*leftButton.width-2*leftButton.anchors.leftMargin-2*anchors.leftMargin
                 height: parent.height-imageSource.height
 
-                Card{
-                    id:card1
-                    width:parent.height/1.5
-                    anchors.verticalCenter: parent.verticalCenter
+                model:ListModel{}
+                delegate: Component{
+                    id:componentModel
+                    Card{urlImage: mysource
+                         word:myword
+                         translation: mytranslation
+                         width:parent.height/1.5
+                         //ma:MouseArea{onClicked: manager.updatePicture(word)}
 
+                    }
                 }
+                cacheBuffer: 250
+                clip:true
             }
             Rectangle{
                 id:rightButton
@@ -356,6 +370,7 @@ Window {
                             id: right_area
                             anchors.fill: parent
                             hoverEnabled: true
+                            onClicked: container.contentX+=50
                         }
                 Image{
                     source: "images/arrow-right-white.png"

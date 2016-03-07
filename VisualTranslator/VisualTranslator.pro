@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     model/yantranslate.cpp \
     model/instapicture.cpp \
     controller/appmanager.cpp \
-    model/translator.cpp
+    model/translator.cpp \
+    model/imager.cpp
 
 RESOURCES += view/qml.qrc \
     view/image.qrc
@@ -22,4 +23,5 @@ HEADERS += \
     model/instapicture.h \
     appmanager.h \
     controller/appmanager.h \
-    model/translator.h
+    model/translator.h \
+    model/imager.h

@@ -20,9 +20,10 @@
 #include <QJsonValue>
 #include <QArrayData>
 #include <QObject>
+#include "imager.h"
 
 
-class InstaPicture : public QObject
+class InstaPicture : public QObject, public Imager
 {
 
  Q_OBJECT
@@ -31,7 +32,7 @@ public:
 
 
     InstaPicture(QNetworkAccessManager* man);
-    Q_INVOKABLE QString getPicture(QString str);
+    QString getPicture(QString str);
 
 
 private:

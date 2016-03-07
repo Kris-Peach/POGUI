@@ -4,23 +4,22 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls.Private 1.0
 import QtGraphicalEffects 1.0
+import Qt.controller.appmanager 1.0
 import "."
-/*Window {
-    id:main
-    visible: true
-    width: 400
-    height: width+50*/
     Rectangle{
         width: 300
         height: width*1.4
         radius: width/30
         border.color:MyStyle.greyColor
         property string urlImage: "images/picture.jpg"
+        property string word: "Cat"
+        property string translation:"Кошка"
+        //property  repl_cl:0
         color:MyStyle.backgroundCard
         Text{
             id:inputText
             font.pixelSize: parent.width*2/24
-            text:qsTr("Cat")
+            text:qsTr(word)
             anchors.top: parent.top; anchors.topMargin: parent.width/20
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -61,6 +60,11 @@ import "."
                                 id: replace_area
                                 anchors.fill: parent
                                 hoverEnabled: true
+                                onClicked: {
+                                    urlImage=AppManager.updatePicture(word)
+                                    picture.source=urlImage
+                                }
+
                             }
                 }
                 Image{
@@ -73,6 +77,7 @@ import "."
                                 id: like_area
                                 anchors.fill: parent
                                 hoverEnabled: true
+
                             }
                 }
             }
@@ -80,7 +85,7 @@ import "."
         Text{
             id:outputText
             font.pixelSize:parent.width*2/24
-            text:qsTr("Кошка")
+            text:qsTr(translation)
             anchors.bottom: parent.bottom; anchors.bottomMargin:  parent.width/20
             anchors.horizontalCenter: parent.horizontalCenter
         }

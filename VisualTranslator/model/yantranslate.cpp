@@ -20,10 +20,14 @@ QString YanTranslate::translate()
     QByteArray answer = GET(url);
     if (answer.isEmpty())
     {
+        answer=GET(url);
+        if(answer.isEmpty())
+        {
         int n = QMessageBox::critical(0, "Attention","Нет соединения с Яндекс.Переводчик",
                                               QMessageBox::Cancel | QMessageBox::Escape);
                 if (n == QMessageBox::Cancel)
                     return "";
+        }
     }
     QString translation (parsJson(answer));
     return translation;

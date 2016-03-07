@@ -3,6 +3,8 @@
 InstaPicture::InstaPicture(QNetworkAccessManager* man)
 {
     this->manager=man;
+    QTime midnight(0,0,0);
+    qsrand(midnight.secsTo(QTime::currentTime()));
 }
 
 
@@ -51,6 +53,8 @@ QString InstaPicture::getPicture(QString str)
     //Если все ок
     if (code==200){
     QJsonArray value = jObj["data"].toArray();
+    //int index=qrand()%value.count();
+    //qDebug()<<qrand()<<value.count();
 
     // Получаем из json-a адрес нашей картинки
     QJsonObject mainMap = value[0].toObject()["images"].toObject();
