@@ -5,7 +5,9 @@ CONFIG += c++11 qml_debug
 
 SOURCES += main.cpp \
     model/yantranslate.cpp \
-    model/instapicture.cpp
+    model/instapicture.cpp \
+    controller/appmanager.cpp \
+    model/translator.cpp
 
 RESOURCES += view/qml.qrc \
     view/image.qrc
@@ -17,4 +19,7 @@ include(deployment.pri)
 
 HEADERS += \
     model/yantranslate.h \
-    model/instapicture.h
+    model/instapicture.h \
+    appmanager.h \
+    controller/appmanager.h \
+    model/translator.h

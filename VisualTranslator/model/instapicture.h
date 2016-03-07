@@ -30,12 +30,12 @@ class InstaPicture : public QObject
 public:
 
 
-    InstaPicture();
+    InstaPicture(QNetworkAccessManager* man);
     Q_INVOKABLE QString getPicture(QString str);
 
 
 private:
-
+        QNetworkAccessManager* manager;
 QByteArray GET(QUrl);
 
 QString hesh;

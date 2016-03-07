@@ -163,8 +163,6 @@ Window {
                         anchors.fill: parent
                         hoverEnabled: true
                         onClicked:{
-                            //yandexTranslater.setText(textInput.text)
-                            //yandexTranslater.setLang(langInput+"-"+langOutput)
                             var str=manager.translate(0,langInput+"-"+langOutput,textInput.text)//yandexTranslater.yantranslate();
                             textOutput.text=qsTr(str);
                            // if(checkTransleteInImage.checked)

@@ -1,38 +1,14 @@
 #include "yantranslate.h"
 
-
-YanTranslate::YanTranslate():QObject()
+YanTranslate::YanTranslate(QNetworkAccessManager* man):QObject()
 {
     QString key ("trnsl.1.1.20160223T163752Z.4ac0c18bf2406e04.f5b813437ccfb127de3d1bf07e0ad35d8474ec66");
     YanKey = key;
     QString url("https://translate.yandex.net/api/v1.5/tr.json/translate?");
     YanUrl = url;
-
+    this->manager=man;
 }
-
-void YanTranslate::setText(QString str)
-{
-    Text = str;
-    return;
-}
-
-QString YanTranslate::getText()
-{
-    return Text;
-}
-
-void YanTranslate::setLang(QString str)
-{
-    Lang = str;
-    return;
-}
-
-QString YanTranslate::getLang()
-{
-    return Lang;
-}
-
-QString YanTranslate::yantranslate()
+QString YanTranslate::translate()
 {
     QUrl url(YanUrl);
     QUrlQuery current(url);
@@ -46,7 +22,8 @@ QString YanTranslate::yantranslate()
     {
         int n = QMessageBox::critical(0, "Attention","Нет соединения с Яндекс.Переводчик",
                                               QMessageBox::Cancel | QMessageBox::Escape);
-                if (n == QMessageBox::Cancel) return "";
+                if (n == QMessageBox::Cancel)
+                    return "";
     }
     QString translation (parsJson(answer));
     return translation;
@@ -83,6 +60,7 @@ QString YanTranslate::parsJson(QByteArray answer)
     }
     else {
         parsError(code);
+        translation=" ";
     }
     return translation;
 }

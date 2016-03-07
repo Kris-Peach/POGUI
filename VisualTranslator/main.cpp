@@ -1,19 +1,19 @@
 #include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
-#include "model/yantranslate.h"
 #include <QQmlContext>
-#include "model/instapicture.h"
+#include "controller/appmanager.h"
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
-    YanTranslate* yandex=new YanTranslate();
-    InstaPicture* instagram=new InstaPicture();
+    QApplication app(argc, argv);
+
     QQmlApplicationEngine engine;
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-    engine.rootContext()->setContextProperty("yandexTranslater",yandex);
-    engine.rootContext()->setContextProperty("instaPicture",instagram);
+    AppManager* manager=new AppManager();
+    engine.rootContext()->setContextProperty("manager",manager);
+    //engine.rootContext()->setContextProperty("instaPicture",instagram);
     return app.exec();
 }

@@ -1,14 +1,14 @@
 #include "instapicture.h"
 
-InstaPicture::InstaPicture()
+InstaPicture::InstaPicture(QNetworkAccessManager* man)
 {
-
+    this->manager=man;
 }
 
 
 QByteArray InstaPicture::GET(QUrl r)
 {
-    QNetworkAccessManager *manager = new QNetworkAccessManager (this);
+   // QNetworkAccessManager *manager = new QNetworkAccessManager (this);
     QNetworkReply *reply = manager->get(QNetworkRequest(r));
     QEventLoop wait;
     connect (manager,SIGNAL(finished(QNetworkReply*)),&wait,SLOT(quit()));
