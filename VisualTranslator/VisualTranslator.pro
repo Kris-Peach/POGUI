@@ -8,7 +8,9 @@ SOURCES += main.cpp \
     model/instapicture.cpp \
     controller/appmanager.cpp \
     model/translator.cpp \
-    model/imager.cpp
+    model/imager.cpp \
+    model/multilecttranslate.cpp \
+    model/gettyimag.cpp
 
 RESOURCES += view/qml.qrc \
     view/image.qrc
@@ -24,4 +26,10 @@ HEADERS += \
     appmanager.h \
     controller/appmanager.h \
     model/translator.h \
-    model/imager.h
+    model/imager.h \
+    model/multilecttranslate.h \
+    model/gettyimag.h
+RC_FILE = myapp.rc
+DISTFILES += \
+    myapp.rc \
+    Setting.txt

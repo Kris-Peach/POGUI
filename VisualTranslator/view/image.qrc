@@ -23,5 +23,6 @@
         <file>images/rotate.png</file>
         <file>images/rotate-down.png</file>
         <file>images/replace-down.png</file>
+        <file>images/icon.ico</file>
     </qresource>
 </RCC>

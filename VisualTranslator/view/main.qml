@@ -77,6 +77,7 @@ Window {
                     if(0===currentIndex) langInput="en"
                     else langInput="ru"
                 }
+
             }
             Image{
                 id:volumeInputButton
@@ -164,13 +165,16 @@ Window {
                         anchors.fill: parent
                         hoverEnabled: true
                         onClicked:{
-                            var str=AppManager.translate(0,langInput+"-"+langOutput,textInput.text)//yandexTranslater.yantranslate();
+                            var str=AppManager.translate(chooseTranslator.currentIndex,inputLang.currentIndex,outputLang.currentIndex,textInput.text)//yandexTranslater.yantranslate();
                             textOutput.text=qsTr(str);
                             container.model.clear()
-                            var words=AppManager.getDataForCards(0,textInput.text)
+                            if(checkTransleteInImage.checked)
+                            {
+                            var words=AppManager.getDataForCards(imageSource.currentIndex,textInput.text)
                             for(var i=0;i<words[0].length;i++)
                                container.model.append({"myword":words[0][i],"mytranslation":words[1][i],
                                                       "mysource":words[2][i]})
+                            }
 
                            // if(checkTransleteInImage.checked)
                             //card1.urlImage=instaPicture.getPicture(str);
@@ -240,7 +244,7 @@ Window {
                 width:100
                 model:ListModel{
                     ListElement{text:"Yandex"}
-                    ListElement{text:"Bing"}
+                    ListElement{text:"Multilect"}
                 }
 
             }
@@ -295,7 +299,7 @@ Window {
                 width:100
                 model:ListModel{
                     ListElement {text:"Instagrame"}
-                    ListElement {text:"Bing"}
+                    ListElement {text:"GettyImag"}
                 }
             }
             Rectangle{
@@ -319,19 +323,6 @@ Window {
                     anchors.centerIn: parent
                 }
             }
-            DropShadow {
-
-                        anchors.fill: source
-                        //horizontalOffset: 0.5
-                        verticalOffset: 0.5
-                        fast: false
-                        radius:8.0
-                        samples:16
-                        color: "#78000000"
-                        source: leftButton
-                        smooth: true;
-                        cached: true;
-                }
 
             ListView{
                 id:container
@@ -378,19 +369,6 @@ Window {
                     height: width
                     anchors.centerIn: parent
                 }
-            }
-            DropShadow {
-
-                    anchors.fill: source
-                    horizontalOffset: 0
-                    verticalOffset: 0.5
-                    //fast: false
-                    radius:8.0
-                    samples:16
-                    color: "#78000000"
-                    source: rightButton
-                    //smooth: true;
-                   // cached: true;
             }
         }
     }
