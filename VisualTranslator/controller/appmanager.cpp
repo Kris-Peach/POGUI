@@ -89,8 +89,8 @@ QVariantList AppManager::getDataForCards(int numSource,QString text)
         //YandexTranslator->setLang("ru-en");
         translations.append(YandexTranslator->translate());
         if(YandexTranslator->getLang().split("-")[0]=="ru") picture=translations.at(i);
-
-        urlImages.append(imager->getPicture(words[i]));
+        QString str=imager->getPicture(picture);
+        urlImages.append(str);
         qDebug()<<words[i]<<translations[i]<<urlImages.at(i);
     }
     list.append(words);
@@ -102,7 +102,9 @@ QVariantList AppManager::getDataForCards(int numSource,QString text)
 QString AppManager::updatePicture(QString word)
 {
     qDebug()<<word;
-    QString url=imager->getPicture(word);
+    MultilectTranslator->setLang("rus-eng");
+    MultilectTranslator->setText(word);
+    QString url=imager->getPicture(MultilectTranslator->translate());
     qDebug()<<url;
     return url;//imager->getPicture(word);
 }

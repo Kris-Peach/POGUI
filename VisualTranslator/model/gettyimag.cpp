@@ -37,7 +37,7 @@ QString GettyImag::getPicture(QString str)
     QString ret_answer = "";
 
     //Для рандомизации выбора
-    int in=qrand();
+    int in=qrand()%5;
     rand.setNum(in);
     hesh= str;
 
@@ -45,18 +45,21 @@ QString GettyImag::getPicture(QString str)
     QUrl url ( "https://api.gettyimages.com/v3/search/images?phrase="+hesh+"&page="+rand+"&page_size=1" );
     QByteArray answer = GET (url);
     qDebug()<< answer; // Получаем ответ в json формате
-
     QJsonParseError *errPar =new QJsonParseError();
     QJsonDocument doc= QJsonDocument::fromJson(answer,errPar);
+
     QJsonObject jObj= doc.object();
 
-    //Получаем массивчик json-чиков
+    if(!jObj["images"].isNull())
+    {//Получаем массивчик json-чиков
     QJsonArray value = jObj["images"].toArray();
 
     // Получаем из json адрес нашей картинки
     QJsonArray mainMap = value[0].toObject()["display_sizes"].toArray();
     QString uri =mainMap[0].toObject()["uri"].toString();
     ret_answer=uri;
+    }
+    else ret_answer="http://t-cent.com/img/clipart-cross-icon-512x512-f5d9.png";
 
     return ret_answer;
 }
