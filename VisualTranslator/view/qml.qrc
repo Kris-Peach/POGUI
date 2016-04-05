@@ -7,5 +7,6 @@
         <file>LightTextAreaStyle.qml</file>
         <file>qmldir</file>
         <file>Card.qml</file>
+        <file>Gallery.qml</file>
     </qresource>
 </RCC>

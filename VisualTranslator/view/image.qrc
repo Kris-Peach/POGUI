@@ -24,5 +24,7 @@
         <file>images/rotate-down.png</file>
         <file>images/replace-down.png</file>
         <file>images/icon.ico</file>
+        <file>images/zoom-in.png</file>
+        <file>images/zoom-in-down.png</file>
     </qresource>
 </RCC>

@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets
+QT += qml quick widgets network multimedia
 CONFIG += c++11 qml_debug
 
 SOURCES += main.cpp \
@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     model/translator.cpp \
     model/imager.cpp \
     model/multilecttranslate.cpp \
-    model/gettyimag.cpp
+    model/gettyimag.cpp \
+    model/voicerssclient.cpp
 
 RESOURCES += view/qml.qrc \
     view/image.qrc
@@ -28,7 +29,8 @@ HEADERS += \
     model/translator.h \
     model/imager.h \
     model/multilecttranslate.h \
-    model/gettyimag.h
+    model/gettyimag.h \
+    model/voicerssclient.h
 RC_FILE = myapp.rc
 DISTFILES += \
     myapp.rc \

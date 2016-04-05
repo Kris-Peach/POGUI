@@ -7,6 +7,7 @@ import QtGraphicalEffects 1.0
 import Qt.controller.appmanager 1.0
 import "."
     Rectangle{
+        id:root
         width: 300
         height: width*1.4
         radius: width/30
@@ -68,15 +69,21 @@ import "."
                             }
                 }
                 Image{
-                    id:likeButton
-                    source: like_area.pressed ? "images/like-down.png" :"images/like.png"
+                    id:zoomButton
+                    source: zoom_area.pressed ? "images/zoom-in-down.png" :"images/zoom-in.png"
                     width: parent.height
                     height: width
                     anchors.left:replaceButton.right
                     MouseArea {
-                                id: like_area
+                                id: zoom_area
                                 anchors.fill: parent
                                 hoverEnabled: true
+                                onClicked:
+                                {
+                                    var component=Qt.createComponent("Gallery.qml")
+                                    var window=component.createObject(root,{"url":urlImage})
+                                    window.show()
+                                }
 
                             }
                 }

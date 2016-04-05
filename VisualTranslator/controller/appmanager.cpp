@@ -7,6 +7,7 @@ AppManager::AppManager(QObject *parent) : QObject(parent)
     YandexTranslator=new YanTranslate(NetworkManager);
     MultilectTranslator=new MultilectTranslate(NetworkManager);
     GettyImageManager=new GettyImag(NetworkManager);
+    voiceRSSClient=new VoiceRSSClient(NetworkManager);
     //Setting=loadSetting(AppManager::Json);
 }
 QString  AppManager::translate(int numTranslator, int lang_from, int lang_to, QString text)
@@ -74,6 +75,7 @@ QVariantList AppManager::getDataForCards(int numSource,QString text)
     }
     qDebug()<<numSource;
     text.remove(QRegExp("[\.\,\!\?\^\\\\\/\&\$\*\\[\\]\\{\\}\+\-;=@%:><\(\)\~\`\"\'%№#\|]"));
+
     //text.remove(QRegExp("\b(the\s|a\s)\b"));
     //text.remove(QRegExp("\\b(the|a|in|from|and|or|to|about)\\b"));
    // text.remove(QRegExp("\\b(и|а|у|с|к|в|из)\\b"));
@@ -89,6 +91,8 @@ QVariantList AppManager::getDataForCards(int numSource,QString text)
         //YandexTranslator->setLang("ru-en");
         translations.append(YandexTranslator->translate());
         if(YandexTranslator->getLang().split("-")[0]=="ru") picture=translations.at(i);
+        picture.remove(QRegExp("\\b(the|a)\\b"));
+        picture.remove(QRegExp("\\s"));
         QString str=imager->getPicture(picture);
         urlImages.append(str);
         qDebug()<<words[i]<<translations[i]<<urlImages.at(i);
@@ -101,13 +105,20 @@ QVariantList AppManager::getDataForCards(int numSource,QString text)
 }
 QString AppManager::updatePicture(QString word)
 {
-    qDebug()<<word;
+    //qDebug()<<word;
     MultilectTranslator->setLang("rus-eng");
     MultilectTranslator->setText(word);
     QString url=imager->getPicture(MultilectTranslator->translate());
-    qDebug()<<url;
-    return url;//imager->getPicture(word);
+    //qDebug()<<url;
+    return url;
 }
+void AppManager::speak(QString text,QString lang)
+{
+    QString l="en-GB";
+    if(lang=="Русский") l="ru-ru";
+    voiceRSSClient->speak(text,l);
+}
+
 /*QJsonObject AppManager::loadSetting(AppManager::SaveFormat saveFormat)
 {
     QFile loadFile(saveFormat == Json

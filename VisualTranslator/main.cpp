@@ -5,6 +5,7 @@
 #include <QQmlContext>
 #include <QtQml>
 #include <QIcon>
+
 #include "controller/appmanager.h"
 
 int main(int argc, char *argv[])

@@ -7,6 +7,7 @@ import QtQuick.Controls.Private 1.0
 import QtGraphicalEffects 1.0
 import Qt.controller.appmanager 1.0
 import "."
+//import "index.js" as IvonaAPI
 Window {
     id:mainWindow
     visible: true
@@ -90,6 +91,7 @@ Window {
                             id: volumeInput_area
                             anchors.fill: parent
                             hoverEnabled: true
+                            onClicked: AppManager.speak(textInput.text,inputLang.currentText)
                         }
             }
             Image{
@@ -165,7 +167,9 @@ Window {
                         anchors.fill: parent
                         hoverEnabled: true
                         onClicked:{
-                            var str=AppManager.translate(chooseTranslator.currentIndex,inputLang.currentIndex,outputLang.currentIndex,textInput.text)//yandexTranslater.yantranslate();
+                            var str=AppManager.translate(chooseTranslator.currentIndex,
+                                                         inputLang.currentIndex,outputLang.currentIndex,
+                                                         textInput.text)
                             textOutput.text=qsTr(str);
                             container.model.clear()
                             if(checkTransleteInImage.checked)
@@ -260,6 +264,7 @@ Window {
                             id: volumeOutput_area
                             anchors.fill: parent
                             hoverEnabled: true
+                            onClicked: AppManager.speak(textOutput.text,outputLang.currentText)
                         }
 
             }

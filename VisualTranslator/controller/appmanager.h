@@ -10,6 +10,7 @@
 #include "model/imager.h"
 #include "model/multilecttranslate.h"
 #include "model/gettyimag.h"
+#include "model/voicerssclient.h"
 
 class AppManager : public QObject
 {
@@ -20,10 +21,13 @@ private:
     YanTranslate* YandexTranslator;
     MultilectTranslate* MultilectTranslator;
     GettyImag* GettyImageManager;
+    VoiceRSSClient* voiceRSSClient;
     Imager* imager;
     Translator* translator;
     QNetworkAccessManager* NetworkManager;
     QJsonObject Setting;
+
+
 
     enum SaveFormat {
             Json, Binary
@@ -47,6 +51,7 @@ public:
     Q_INVOKABLE QString translate(int numTranslator, int lang_from, int lang_to, QString text);
     Q_INVOKABLE QVariantList getDataForCards(int numSource,QString text);
     Q_INVOKABLE QString updatePicture(QString word);
+    Q_INVOKABLE void speak(QString text,QString lang);
     //Q_INVOKABLE void putSetting(QString name, QString value);
    // Q_INVOKABLE QString getSetting(QString name);
 

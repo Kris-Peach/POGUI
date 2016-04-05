@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>index.js</file>
+        <file>ivona-api.js</file>
+    </qresource>
+</RCC>
