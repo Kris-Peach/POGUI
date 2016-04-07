@@ -26,5 +26,6 @@
         <file>images/icon.ico</file>
         <file>images/zoom-in.png</file>
         <file>images/zoom-in-down.png</file>
+        <file>images/big_microphone.png</file>
     </qresource>
 </RCC>

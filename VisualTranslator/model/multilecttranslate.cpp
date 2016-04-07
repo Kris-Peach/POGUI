@@ -7,7 +7,7 @@ MultilectTranslate::MultilectTranslate(QNetworkAccessManager* man):QObject()
     MultilectId = id;
     QString url("http://api.multillect.com/translate/json/1.0/" + id);
     MuiltilectUrl = url;
-    QString sig("972f666e11d2f83586d10cb69329535c");
+    QString sig("391a3b207d6a81e2790399c394ef769a");
     MultilectSig = sig;
     QString method("translate/api/translate");
     MultilectMethod = method;
@@ -36,6 +36,7 @@ QString MultilectTranslate::translate()
     url.setQuery(current);
 
     QByteArray answer = GET(url);
+   qDebug()<<QString::fromUtf8(answer);
     if(answer.isEmpty())
             {
             int n = QMessageBox::critical(0, "Attention","Нет соединения с Multilect",

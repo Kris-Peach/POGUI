@@ -11,12 +11,12 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    //app.setWindowIcon(QIcon("C:\\Users\\SofySmo\\Documents\\VisualTranslator\\view\\images\\icon.png"));
     QQmlApplicationEngine engine;
     qmlRegisterSingletonType<AppManager>("Qt.controller.appmanager",1,0,"AppManager",&AppManager::qmlInstance);
 
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    //QObject* root=engine.rootObjects()[0];
 
    // AppManager* manager=new AppManager();
    // engine.rootContext()->setContextProperty("manager",manager);

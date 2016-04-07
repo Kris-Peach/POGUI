@@ -16,6 +16,7 @@ QtObject{
     property int marginMicro: 2
     property color buttonColor: "#BA68C8"
     property color buttonColorDown: "#6A1B9A"
+    property color buttonColorEnable: "#fff777"
     property color textButtonColor: "#ffffff"
     property int minWidthInputBox: 300
     property int minHeightCartBox:250    

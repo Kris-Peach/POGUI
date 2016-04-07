@@ -11,6 +11,8 @@
 #include "model/multilecttranslate.h"
 #include "model/gettyimag.h"
 #include "model/voicerssclient.h"
+#include "model/interf.h"
+
 
 class AppManager : public QObject
 {
@@ -26,6 +28,8 @@ private:
     Translator* translator;
     QNetworkAccessManager* NetworkManager;
     QJsonObject Setting;
+    Interf* Speech;
+    QString RecordText;
 
 
 
@@ -52,11 +56,14 @@ public:
     Q_INVOKABLE QVariantList getDataForCards(int numSource,QString text);
     Q_INVOKABLE QString updatePicture(QString word);
     Q_INVOKABLE void speak(QString text,QString lang);
+    Q_INVOKABLE void startSpeak();
+    Q_INVOKABLE void stopSpeak();
+    Q_INVOKABLE QString getRecordText();
     //Q_INVOKABLE void putSetting(QString name, QString value);
    // Q_INVOKABLE QString getSetting(QString name);
 
 signals:
-
+void textIsWritten();
 public slots:
 };
 

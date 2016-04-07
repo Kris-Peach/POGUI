@@ -8,6 +8,7 @@ import QtGraphicalEffects 1.0
 import Qt.controller.appmanager 1.0
 import "."
 //import "index.js" as IvonaAPI
+
 Window {
     id:mainWindow
     visible: true
@@ -17,6 +18,17 @@ Window {
 
     property string langInput: "ru"
     property string langOutput: "en"
+    /*AppManager
+    {
+        id:app
+        onTextIsWritten: {textInput.text=AppManager.getRecordText()}
+    }*/
+    Connections{
+        target: AppManager
+        onTextIsWritten:{
+            textInput.text=AppManager.getRecordText()
+        }
+    }
 
     Rectangle{
         id:head
@@ -92,6 +104,7 @@ Window {
                             anchors.fill: parent
                             hoverEnabled: true
                             onClicked: AppManager.speak(textInput.text,inputLang.currentText)
+
                         }
             }
             Image{
@@ -107,7 +120,14 @@ Window {
                             id: microfonInput_area
                             anchors.fill: parent
                             hoverEnabled: true
+                            onClicked: {
+                                var component=Qt.createComponent("Microfon.qml")
+                                var window=component.createObject(mainWindow,{"ifspeak":false})
+                                window.show()
+
+                            }
                         }
+
             }
             Image{
                 id:clearInputButton

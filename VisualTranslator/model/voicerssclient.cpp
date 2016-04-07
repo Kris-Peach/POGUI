@@ -11,13 +11,12 @@ VoiceRSSClient::VoiceRSSClient(QNetworkAccessManager* manager)
 void VoiceRSSClient::speak(QString text,QString lang){
     QUrl url("http://api.voicerss.org/?key="+key+"&src="+text+"&hl="+lang);
     QByteArray answer=Get(url);
+    buffer->buffer().clear();
     buffer->seek(0);
     buffer->write(answer);
     buffer->seek(0);
     player->setMedia(QMediaContent(),buffer);
     player->play();
-    /*QDir *rmDir = new QDir(location);
-    rmDir->removeRecursively();*/
 }
 
 QByteArray VoiceRSSClient::Get(QUrl url){

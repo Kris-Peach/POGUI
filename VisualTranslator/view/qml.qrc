@@ -8,5 +8,6 @@
         <file>qmldir</file>
         <file>Card.qml</file>
         <file>Gallery.qml</file>
+        <file>Microfon.qml</file>
     </qresource>
 </RCC>

@@ -8,6 +8,11 @@ AppManager::AppManager(QObject *parent) : QObject(parent)
     MultilectTranslator=new MultilectTranslate(NetworkManager);
     GettyImageManager=new GettyImag(NetworkManager);
     voiceRSSClient=new VoiceRSSClient(NetworkManager);
+
+    Speech = new Interf;
+    Speech->m_manager= new QNetworkAccessManager(this);
+    Speech->m_buffer.setData(QByteArray());
+    Speech->m_buffer.open(QIODevice::ReadWrite);
     //Setting=loadSetting(AppManager::Json);
 }
 QString  AppManager::translate(int numTranslator, int lang_from, int lang_to, QString text)
@@ -106,9 +111,13 @@ QVariantList AppManager::getDataForCards(int numSource,QString text)
 QString AppManager::updatePicture(QString word)
 {
     //qDebug()<<word;
-    MultilectTranslator->setLang("rus-eng");
-    MultilectTranslator->setText(word);
-    QString url=imager->getPicture(MultilectTranslator->translate());
+    //MultilectTranslator->setLang("rus-eng");
+    //MultilectTranslator->setText(word);
+    //QString tr=MultilectTranslator->translate();
+    //qDebug()<<tr;
+    YandexTranslator->setLang("ru-en");
+    YandexTranslator->setText(word);
+    QString url=imager->getPicture(YandexTranslator->translate());
     //qDebug()<<url;
     return url;
 }
@@ -117,6 +126,44 @@ void AppManager::speak(QString text,QString lang)
     QString l="en-GB";
     if(lang=="Русский") l="ru-ru";
     voiceRSSClient->speak(text,l);
+}
+void AppManager::startSpeak()
+{
+    //чистим буф
+    Speech->m_buffer.buffer().clear();
+
+    //устанавливаем формат аудио
+    Speech->m_format.setSampleRate(16000);
+    Speech->m_format.setChannelCount(1);
+    Speech-> m_format.setSampleSize(16);
+    Speech->m_format.setSampleType(QAudioFormat::SignedInt);
+    Speech-> m_format.setByteOrder(QAudioFormat::LittleEndian);
+    Speech->m_format.setCodec("audio/pcm");
+
+    QAudioDeviceInfo info(QAudioDeviceInfo::defaultInputDevice());
+    if (!info.isFormatSupported(Speech->m_format)) {
+        Speech->m_format = info.nearestFormat(Speech->m_format);
+    }
+
+
+    Speech->m_audioInput = new QAudioInput(Speech->m_format, this);
+    //начинаем запись
+    Speech->m_audioInput->start(&Speech->m_buffer);
+
+}
+
+void AppManager::stopSpeak()
+{
+    Speech->m_audioInput->stop();
+    delete  Speech->m_audioInput;
+    RecordText=Speech->recognizeSpeech();
+    if(RecordText=="400")
+        RecordText="Sorry it is not possible to recognize.";
+    emit textIsWritten();
+}
+QString AppManager::getRecordText()
+{
+    return RecordText;
 }
 
 /*QJsonObject AppManager::loadSetting(AppManager::SaveFormat saveFormat)
@@ -164,7 +211,7 @@ void AppManager::write(QJsonObject &json, QString name,QString value) const
        // mPlayer.write(playerObject);
         json[name] = value;
 
-       /* QJsonArray levelArray;
+       QJsonArray levelArray;
         foreach (const Level level, mLevels) {
             QJsonObject levelObject;
             level.write(levelObject);
