@@ -15,6 +15,7 @@ Window {
         width: 300
         height: 400
         color:MyStyle.backgroundColor
+
     Rectangle{
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top; anchors.topMargin: 40
@@ -24,11 +25,20 @@ Window {
         border.width: 5
         radius: 100
         Image{
+            id:mic_imag
             anchors.centerIn:parent
             source:"images/big_microphone.png"
             width: 80
-
             height: width*1.6
+            visible:true
+        }
+        Text{
+            id:waitText
+            text: qsTr("Waiting...")
+            anchors.centerIn: parent
+            font.pixelSize: 18
+            color:MyStyle.greyColor
+            visible: false
         }
     }
 
@@ -46,6 +56,7 @@ Window {
             text: qsTr("Start")
             anchors.centerIn: parent
             font.pixelSize: 18
+
         }
         MouseArea {
                     id: start_area
@@ -83,6 +94,8 @@ Window {
                     hoverEnabled: true
                     enabled: false
                     onClicked: {
+                        mic_imag.visible=false
+                        waitText.visible=true
                         AppManager.stopSpeak()
                         rmicr.close()
 

@@ -15,6 +15,18 @@ AppManager::AppManager(QObject *parent) : QObject(parent)
     Speech->m_buffer.open(QIODevice::ReadWrite);
     //Setting=loadSetting(AppManager::Json);
 }
+AppManager::~AppManager()
+{
+    delete InstagramManager;
+    delete YandexTranslator;
+    delete MultilectTranslator;
+    delete GettyImageManager;
+    delete voiceRSSClient;
+    delete Speech;
+    delete NetworkManager;
+
+}
+
 QString  AppManager::translate(int numTranslator, int lang_from, int lang_to, QString text)
 {
     QString langs;
@@ -98,6 +110,7 @@ QVariantList AppManager::getDataForCards(int numSource,QString text)
         if(YandexTranslator->getLang().split("-")[0]=="ru") picture=translations.at(i);
         picture.remove(QRegExp("\\b(the|a)\\b"));
         picture.remove(QRegExp("\\s"));
+
         QString str=imager->getPicture(picture);
         urlImages.append(str);
         qDebug()<<words[i]<<translations[i]<<urlImages.at(i);

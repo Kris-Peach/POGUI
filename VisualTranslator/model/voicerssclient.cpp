@@ -8,6 +8,12 @@ VoiceRSSClient::VoiceRSSClient(QNetworkAccessManager* manager)
     buffer = new QBuffer(this);
     buffer->open(QIODevice::ReadWrite);
 }
+VoiceRSSClient::~VoiceRSSClient()
+{
+    delete buffer;
+    delete player;
+}
+
 void VoiceRSSClient::speak(QString text,QString lang){
     QUrl url("http://api.voicerss.org/?key="+key+"&src="+text+"&hl="+lang);
     QByteArray answer=Get(url);

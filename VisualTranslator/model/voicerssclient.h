@@ -15,6 +15,7 @@ class VoiceRSSClient:public QObject
     QByteArray Get(QUrl url);
     QString key="363b0feabbc84af9a83fd6d406cb3054";
 public:
+    ~VoiceRSSClient();
     VoiceRSSClient(QNetworkAccessManager* manager);
     QNetworkAccessManager* networkManager;
     QBuffer* buffer;

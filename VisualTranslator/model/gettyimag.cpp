@@ -40,7 +40,7 @@ QString GettyImag::getPicture(QString str)
     int in=qrand()%5;
     rand.setNum(in);
     hesh= str;
-
+    qDebug()<<hesh;
     //Отправляем запрос
     QUrl url ( "https://api.gettyimages.com/v3/search/images?phrase="+hesh+"&page="+rand+"&page_size=1" );
     QByteArray answer = GET (url);

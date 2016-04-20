@@ -29,6 +29,7 @@ class Interf : public QObject
 
 public:
     Interf();
+    ~Interf();
     const QByteArray &data() const;
     enum State {
          Ready,

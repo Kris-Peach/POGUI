@@ -51,7 +51,7 @@ public:
             return new AppManager;
         }
     explicit AppManager(QObject *parent = 0);
-
+    ~AppManager();
     Q_INVOKABLE QString translate(int numTranslator, int lang_from, int lang_to, QString text);
     Q_INVOKABLE QVariantList getDataForCards(int numSource,QString text);
     Q_INVOKABLE QString updatePicture(QString word);

@@ -5,7 +5,11 @@ Interf::Interf()
 
 }
 
-
+Interf::~Interf()
+{
+    delete m_audioInput;
+    delete m_reply;
+}
 
 const QByteArray &Interf::data() const
 {
